@@ -1,0 +1,151 @@
+#include <iostream>
+#include <string>
+#include <vector>
+#include <cstdlib>
+#include <ctime>
+using namespace std;
+vector <string> agenda;
+void seeder(int n){	
+string contattiMisti[20] = {"Gherta", "Federico","Barbolla","Andrea","Riccardo","Lorenzo", "Celeste","Ludovica","Martina","Alberto", "Giovanni", "Mauro", "Maria", "Alessia", "Mattia", "Noemi", "Beppe","Gabriele","Francesco","Annalisa"};
+//int l= contattiMisti.size();
+for(int i=0; i<n;i++){
+ agenda.push_back(contattiMisti[rand()%20]);
+};
+}
+string aggiungiContatto(string nome){
+agenda.push_back(nome);
+return nome;
+}
+string ModifyContact(string a, string b){
+int l =agenda.size();
+for (int i = 0; i<l; i++){
+ if(agenda[i]==a){
+  agenda[i]=b;
+ }
+}
+return b;
+}
+string deleteContact(string nome){
+int l = agenda.size(), index=-1;
+for(int i = 0;i<l;i++){
+ if(nome==agenda[i]){
+  index=i;
+ }
+}
+if(index==-1){
+ return "nessun nome";
+}
+agenda.erase(agenda.begin()+index);
+return nome;
+}
+ 
+ 
+string addPrefer(string a,string b){
+b=a+" <3";
+int l =agenda.size();
+for (int i = 0; i<l; i++){
+ if(agenda[i]==a){
+  agenda[i]=b;
+ }
+}
+return b;
+}
+ 
+ 
+void printAgenda(){
+int l=agenda.size();
+cout<<endl;
+cout<<endl;
+ cout<<"***************************"<<endl;
+cout<<" CONTATTI IN AGENDA "<<endl;
+for(int i=0;i<l;i++){
+ cout<<i+1<<" . "<<agenda[i]<<endl;
+}
+cout<<"***************************"<<endl;
+cout<<endl;
+}
+int main() {
+char risposta;
+int n;
+cout<<"Quanti contatti vuoi inserire?"<<endl;
+cin>>n;
+seeder(n);
+printAgenda();
+cout<<"Hai "<<n<<" contatti"<<endl<<endl;
+while (true){
+ cout<<"OPERAZIONI POSSIBILI: "<<endl;
+ cout<<"I per inserire un contatto; "<<endl;
+ cout<<"M per modificare un contatto;"<<endl;
+ cout<<"D per cancellare un contatto; "<<endl;
+ cout<<"A per aggiungere ai preferiti;"<<endl;
+ cout<<"P per vedere la rubrica; "<<endl;
+ cout<<"Q per uscire. "<<endl;
+ cin>>risposta;
+ switch(risposta){
+ case 'I':
+ case 'i':{
+  string contatto;
+  cout<<"Nome da inserire: ";
+  cin>>contatto;
+  cout<<"Hai aggiunto il contatto : "<<aggiungiContatto(contatto);
+  printAgenda();
+  int x=agenda.size();
+  cout<<"Hai "<<x<<" contatti"<<endl<<endl;
+  break;
+ }
+ case 'M':
+ case 'm':{
+  string contatto, contattoNew;
+  cout<<"Contatto da modificare: ";
+  cin>>contatto;
+  cout<<"Inserire modifica: ";
+  cin>>contattoNew;
+  cout<<"hai modificato "<<contatto<< " in "<<ModifyContact(contatto, contattoNew);
+  
+  
+  s.replace(s.find("name"), sizeof("name") - 1, contattoNew);
+  
+
+  printAgenda();
+  break;
+ }
+ case 'D':
+ case'd':{
+ 
+  string contatto;
+  cout<<"Contatto da eliminare: ";
+  cin>>contatto;
+  cout<<"Hai cancellato "<<deleteContact(contatto);
+  printAgenda();
+  int x=agenda.size();
+  cout<<"Hai "<<x<<" contatti"<<endl<<endl;
+  break;
+ }
+ 
+ case 'A':
+ case 'a':{
+ 
+   string contatto, contattoPrefer;
+   cout<<"Contatto da aggiungere ai preferiti: ";
+   cin>>contatto;
+   cout<<"Hai aggiunto ai preferiti "<<addPrefer(contatto, contattoPrefer);
+   printAgenda();
+   break;
+ }
+ 
+ case 'P':
+ case 'p':{
+  printAgenda();
+  break;
+ }
+ }
+ if(risposta=='Q'||risposta=='q'){
+  cout<<"Hai deciso di uscire.";
+  printAgenda();
+  break;
+ };
+}
+}
+ 
+ 
+
